@@ -1,8 +1,11 @@
+import { useState } from 'react';
+import { Routes , Route, useNavigate } from 'react-router-dom'
 import './App.css';
 import Cards from './components/cards/Cards.jsx';
 import Nav from './components/nav/nav.jsx';
-import { useState } from 'react';
-import axios from "axios";
+import axios from 'axios';
+import Detail from './components/Detail/Detail'
+import About from './components/About/About'
 
 const URL = "https://rym2.up.railway.app/api/character"
 
@@ -10,6 +13,7 @@ const API_KEY = "henrystaff"
 
 function App() {
 
+      const navigate = useNavigate()
 
    const [ characters , setCharacters] = useState([])
 
@@ -26,10 +30,11 @@ function App() {
             if (data.name) {
                setCharacters([...characters, data])
             } else {
-               window.alert('¡El id debe ser un numero entre 1 y 826!');
+               window.alert("¡El id debe ser un numero entre 1 y 826!");
             }
          }
-      );
+      )
+      navigate("/home")
    }
 
    const onClose = (id) => {
@@ -39,9 +44,18 @@ function App() {
    return (
       <div className='App'>
          <Nav onSearch={onSearch} />
-         <hr />
-         <Cards characters={characters} onClose={onClose}/> 
-
+         <Routes>
+            <Route 
+               path="/home" 
+               element={<Cards characters={characters} onClose={onClose}/>}/>
+            <Route 
+               path="/about" 
+               element={<About/>} />
+            <Route 
+               path="/detail/:id" 
+               element={<Detail/>} />
+            <Route/>
+         </Routes>
       </div>
    );
 }

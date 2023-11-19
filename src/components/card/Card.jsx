@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Card({name, id, status, species, gender, origin, image, onClose}) {
    return (
@@ -11,13 +12,15 @@ export default function Card({name, id, status, species, gender, origin, image, 
          }}
       >
          <button onClick={() => onClose(id)}>X</button>
-         <h2>{name}</h2>
-         <h2>{id}</h2>
-         <h2>{status}</h2>
-         <h2>{species}</h2>
-         <h2>{gender}</h2>
-         <h2>{origin}</h2>
-         <img src={image} alt={name}/>
+         <Link to={`/detail/${id}`}>
+            <h2>{name}</h2>
+            <h2>{id}</h2>
+            <h2>{status}</h2>
+            <h2>{species}</h2>
+            <h2>{gender}</h2>
+            <h2>{origin}</h2>
+            <img src={image} alt={name}/>
+         </Link>
       </div>
    );
 }
