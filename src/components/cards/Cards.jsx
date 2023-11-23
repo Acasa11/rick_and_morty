@@ -6,17 +6,20 @@ export default function Cards({characters, onClose}) {
             flexWrap: "wrap",
             justifyContent: "space-evenly",
    }}>
-         {characters && characters.map((personaje) => {
-         return (<Card
-         key={personaje.id}
-         id={personaje.id}
-         name={personaje.name}
-         status={personaje.status}
-         species={personaje.species}
-         gender={personaje.gender}
-         origin={personaje.origin.name}
-         image={personaje.image} 
-         onClose={onClose}/>)
-      })}
+         {
+         !characters.length ? <h2>Por Favor ingrese un id...</h2>
+         : 
+            characters.map((personaje) => {
+            return (<Card
+            key={personaje.id}
+            id={personaje.id}
+            name={personaje.name}
+            status={personaje.status}
+            species={personaje.species}
+            gender={personaje.gender}
+            origin={personaje.origin.name}
+            image={personaje.image} 
+            onClose={onClose}/>)
+         })}
    </div>)
 }
